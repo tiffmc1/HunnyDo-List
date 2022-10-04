@@ -1,13 +1,13 @@
 import Todo from "./Todo";
 
-const Todos = ({ todos }) => {
+function Todos({ todos, toggleTodo }) {
 	return (
 		<>
 			{todos.map((todo) => (
-				<Todo key={todo.id} todo={todo} />
+				<Todo key={todo.id} todo={todo} toggleTodo={toggleTodo} />
 			))}
 		</>
 	);
-};
+}
 
 export default Todos;
