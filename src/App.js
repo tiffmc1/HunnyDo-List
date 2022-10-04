@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Todos from "./components/Todos";
-// import "./App.css";
+import "./App.css";
 
 const LOCAL_STORAGE_KEY = "todo-list.todos";
 
@@ -51,11 +51,24 @@ function App() {
 
 	return (
 		<>
-			<Todos toggleTodo={toggleTodo} todos={todos} />
-			<input type="text" ref={inputEl} />
-			<button onClick={addTodo}>Add</button>
-			<button onClick={clearTodos}>Clear Fulfilled Todos</button>
-			<div>{todos.filter((todo) => !todo.fulfilled).length} remaining</div>
+			<div className="app-container">
+				<div className="app-wrapper">
+					<h1 className="app-title">"Hunny, Do..." List</h1>
+					<Todos toggleTodo={toggleTodo} todos={todos} />
+					<input className="app-input" type="text" ref={inputEl} />
+					<div className="app-buttons">
+						<button className="app-button-ind" onClick={addTodo}>
+							Add Task
+						</button>
+						<button className="app-button-ind" onClick={clearTodos}>
+							Clear Fulfilled Task(s)
+						</button>
+					</div>
+					<div className="app-remainingTasks">
+						{todos.filter((todo) => !todo.fulfilled).length} Remaining
+					</div>
+				</div>
+			</div>
 		</>
 	);
 }
