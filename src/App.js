@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import Todos from "./components/Todos";
-import "./App.css";
+import "./stylesheets/App.css";
 
 const LOCAL_STORAGE_KEY = "todo-list.todos";
 
