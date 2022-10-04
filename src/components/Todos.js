@@ -4,7 +4,7 @@ const Todos = ({ todos }) => {
 	return (
 		<>
 			{todos.map((todo) => (
-				<Todo key={todo} todo={todo} />
+				<Todo key={todo.id} todo={todo} />
 			))}
 		</>
 	);
