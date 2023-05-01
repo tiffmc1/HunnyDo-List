@@ -1,76 +1,89 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
-import Todos from "./components/Todos";
-import "./stylesheets/App.css";
+import Tasks from "./components/Tasks";
+import "./stylesheets/app.css";
 
-const LOCAL_STORAGE_KEY = "todo-list.todos";
+const TASK_LIST_KEY = "TASK_LIST_KEY";
 
-function App() {
-	const [todos, setTodos] = useState([]);
-	const inputEl = useRef(null);
+const App = () => {
+	const [tasks, setTasks] = useState([]);
+	const inputRef = useRef();
 
-	// get/set local storage so that todos persist (notice how the "get" useEffect is before the "set" useEffect)
 	useEffect(() => {
-		const getTodos = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+		const getTasksFromLocalStore = JSON.parse(
+			localStorage.getItem(TASK_LIST_KEY)
+		);
 
-		if (getTodos.length > 0) setTodos(getTodos);
+		// will not persist without this statement
+		//if (getTasksFromLocalStore.length > 0) setTasks(getTasksFromLocalStore);
+		setTasks((prevTasks) => [...prevTasks, ...getTasksFromLocalStore]);
 	}, []);
 
 	useEffect(() => {
-		localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos));
-	}, [todos]);
+		localStorage.setItem(TASK_LIST_KEY, JSON.stringify(tasks));
+	}, [tasks]);
 
-	function addTodo() {
-		const todo = inputEl.current.value;
+	const handleAddTask = () => {
+		const inputTask = inputRef.current.value;
 
-		// if input is empty
-		if (todo === "") return;
+		if (inputTask === "") return;
 
-		setTodos((prevTodos) => {
-			return [...prevTodos, { id: uuidv4(), name: todo, fulfilled: false }];
-		});
+		setTasks((prevTasks) => [
+			...prevTasks,
+			{ name: inputTask, id: uuidv4(), completed: false },
+		]);
 
-		// reset/clear input value
-		inputEl.current.value = null;
-	}
+		inputRef.current.value = null;
+	};
 
-	function toggleTodo(id) {
-		// in order to avoid the direct modification of original todos list
-		const copyTodos = [...todos];
+	const handleClearTasks = () => {
+		const copiedTasks = [...tasks];
 
-		const todo = copyTodos.find((todo) => todo.id === id);
-		todo.fulfilled = !todo.fulfilled;
-		setTodos(copyTodos);
-	}
+		const uncompletedTasks = copiedTasks.filter(
+			(task) => task.completed === false
+		);
 
-	function clearTodos() {
-		const clearedTodos = todos.filter((todo) => !todo.fulfilled);
+		setTasks(uncompletedTasks);
+	};
 
-		setTodos(clearedTodos);
-	}
+	const handleToggleBox = (taskId) => {
+		// should make a copy in order to avoid the direct modification of the tasks list
+		const copiedTasks = [...tasks];
+
+		const toggleTask = copiedTasks.find((task) => task.id === taskId);
+
+		toggleTask.completed = !toggleTask.completed;
+
+		setTasks(copiedTasks);
+	};
 
 	return (
 		<>
-			<div className="app-container">
-				<div className="app-wrapper">
-					<h1 className="app-title">"Hunny, Do..." List</h1>
-					<Todos toggleTodo={toggleTodo} todos={todos} />
-					<input className="app-input" type="text" ref={inputEl} />
-					<div className="app-buttons">
-						<button className="app-button-ind" onClick={addTodo}>
-							Add Task
-						</button>
-						<button className="app-button-ind" onClick={clearTodos}>
-							Clear Fulfilled Task(s)
-						</button>
-					</div>
-					<div className="app-remainingTasks">
-						{todos.filter((todo) => !todo.fulfilled).length} Remaining
+			<div className="task-list-container">
+				<div className="task-list-left"></div>
+				<div className="task-list-right">
+					<div className="task-list-right-wrapper">
+						<h1 className="task-list-header">"Hunny, Do..." List</h1>
+						<Tasks tasks={tasks} handleToggleBox={handleToggleBox} />
+						<input type="text" ref={inputRef} className="task-list-input" />
+						<div className="btn-wrapper">
+							<button onClick={handleAddTask} className="task-list-btn">
+								Add Task
+							</button>
+							<button onClick={handleClearTasks} className="task-list-btn">
+								Clear Completed Tasks
+							</button>
+						</div>
+						<div className="task-list-remainders">
+							{tasks.length < 2
+								? `${tasks.length} Task Remaining`
+								: `${tasks.length} Tasks Remaining`}
+						</div>
 					</div>
 				</div>
 			</div>
 		</>
 	);
-}
+};
 
 export default App;

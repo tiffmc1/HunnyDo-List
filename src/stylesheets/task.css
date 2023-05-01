@@ -1,0 +1,9 @@
+.task-wrapper {
+	margin-left: 28%;
+}
+
+input[type="checkbox"] {
+	accent-color: rgb(75, 150, 21);
+	margin-right: 4px;
+	margin-top: 5px;
+}

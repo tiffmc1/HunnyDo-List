@@ -1,0 +1,89 @@
+* {
+	line-height: 1.5;
+}
+
+.task-list-container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 90%;
+	max-width: 1000px;
+	margin: 0 auto;
+}
+
+.task-list-left {
+	width: 35%;
+	height: 500px;
+	background-image: url("../assets/images/fruit-bkgd.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	border-radius: 8px;
+}
+
+.task-list-right {
+	width: 40%;
+	min-height: 300px;
+	margin-left: -150px;
+}
+
+.task-list-right-wrapper {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	font-size: 15px;
+	box-shadow: 0 0 10px white;
+	border-radius: 8px;
+	background-color: rgba(232, 186, 60, 0.866);
+}
+
+.task-list-header {
+	color: rgb(122, 137, 6);
+}
+
+.task-list-input {
+	border-radius: 8px;
+	border: rgb(85, 54, 7) 1px solid;
+	padding: 5px;
+	margin: 10px;
+	width: 75%;
+	box-shadow: 0 0 0.2em 0 rgb(57, 47, 32);
+	font-size: 15px;
+	text-align: center;
+}
+
+.task-list-btn {
+	box-sizing: border-box;
+	padding: 5px 2px;
+	margin: 2px auto;
+	text-decoration: none;
+	border: 2px solid rgb(136, 121, 9);
+	border-radius: 8px;
+	width: 100%;
+	position: relative;
+	background: var(--clr-bg);
+	color: rgb(85, 54, 7);
+	font-size: 13px;
+}
+
+.task-list-btn::after {
+	content: "";
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	opacity: 0;
+	background-color: rgba(146, 190, 12, 0.561);
+	transition: opacity 100ms linear;
+}
+
+.task-list-btn:hover::after {
+	opacity: 0.5;
+}
+
+.task-list-remainders {
+	padding: 1rem;
+	color: rgb(145, 93, 16);
+	font-size: 13px;
+}
