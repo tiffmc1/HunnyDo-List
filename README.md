@@ -8,7 +8,7 @@ Hunny, Do... List is a simple to-do list created with React. Users can track the
 
 React v18: For creating fast and responsive UI
 UUID: unique ID generator for users
-Firebase: Hosting
+GitHub Pages: Hosting
 
 ## Installation
 
