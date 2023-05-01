@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/hunny-do-list/static/css/main.906873ac.css",
+    "main.js": "/hunny-do-list/static/js/main.b62eb526.js",
+    "static/media/fruit-bkgd.jpg": "/hunny-do-list/static/media/fruit-bkgd.c2da8600b615f2721246.jpg",
+    "index.html": "/hunny-do-list/index.html",
+    "main.906873ac.css.map": "/hunny-do-list/static/css/main.906873ac.css.map",
+    "main.b62eb526.js.map": "/hunny-do-list/static/js/main.b62eb526.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.906873ac.css",
+    "static/js/main.b62eb526.js"
+  ]
+}
